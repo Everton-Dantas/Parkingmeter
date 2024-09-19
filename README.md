@@ -1,2 +1,2 @@
-# Parlingmeter
+# Parkingmeter
 sistema responsável por gerenciar o tempo de estacionamento dos veículos.
