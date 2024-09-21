@@ -1,7 +1,7 @@
 package br.com.parkingmeter.controller;
 
-import com.parkinmeter.model.Vehicle;
-import com.parkinmeter.service.VehicleService;
+import br.com.parkingmeter.model.Vehicle;
+import br.com.parkingmeter.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
