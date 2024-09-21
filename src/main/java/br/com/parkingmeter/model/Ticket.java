@@ -42,4 +42,7 @@ public class Ticket {
                 ", horaEntrada=" + horaEntrada +
                 '}';
     }
+
+    public void setPlaca(String placa) {
+    }
 }

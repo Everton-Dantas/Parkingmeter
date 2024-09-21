@@ -1,6 +1,5 @@
 package br.com.parkingmeter.controller;
 
-
 import com.parkinmeter.model.Vehicle;
 import com.parkinmeter.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
