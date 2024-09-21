@@ -1,9 +1,8 @@
 package br.com.parkingmeter.controller;
 
-
-import com.parkinmeter.model.Ticket;
-import com.parkinmeter.model.Vehicle;
-import com.parkinmeter.service.EstacionamentoService;
+import br.com.parkingmeter.model.Ticket;
+import br.com.parkingmeter.model.Vehicle;
+import br.com.parkingmeter.service.EstacionamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/parquimetro")
-public class ParquimetroController {
+public class ParquimetroController<Vehicle> {
 
     @Autowired
     private EstacionamentoService estacionamentoService;
@@ -48,7 +47,7 @@ public class ParquimetroController {
     // Ver todos os veículos atualmente estacionados
     @GetMapping("/veiculos")
     public ResponseEntity<List<Vehicle>> listarVeiculos() {
-        List<Vehicle> veiculosEstacionados = estacionamentoService.listarVeiculosEstacionados();
+        List<Vehicle> veiculosEstacionados = (List<Vehicle>) estacionamentoService.listarVeiculosEstacionados();
         return ResponseEntity.ok(veiculosEstacionados);
     }
 }
