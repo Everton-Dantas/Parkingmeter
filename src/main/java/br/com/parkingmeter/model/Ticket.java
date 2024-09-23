@@ -1,48 +1,25 @@
 package br.com.parkingmeter.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Data
+@Entity
 public class Ticket {
 
-    private Vehicle vehicle;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String placa;
     private LocalDateTime horaEntrada;
+    private LocalDateTime horaSaida;
+    private BigDecimal valor;
 
-    // Construtor padrão
-    public Ticket() {
-    }
-
-    // Construtor com argumentos
-    public Ticket(Vehicle vehicle, LocalDateTime horaEntrada) {
-        this.vehicle = vehicle;
-        this.horaEntrada = horaEntrada;
-    }
-
-    // Getters e Setters
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    public LocalDateTime getHoraEntrada() {
-        return horaEntrada;
-    }
-
-    public void setHoraEntrada(LocalDateTime horaEntrada) {
-        this.horaEntrada = horaEntrada;
-    }
-
-    // Método toString para depuração
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "vehicle=" + vehicle +
-                ", horaEntrada=" + horaEntrada +
-                '}';
-    }
-
-    public void setPlaca(String placa) {
-    }
 }
