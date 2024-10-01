@@ -5,6 +5,7 @@ import br.com.parkingmeter.model.Veiculo;
 import br.com.parkingmeter.service.ParquimetroService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,7 +16,7 @@ public class ParquimetroController {
     private final ParquimetroService parquimetroService;
 
     @PostMapping("/entrada")
-    public ResponseEntity<Ticket> registrarEntrada(@RequestBody Veiculo veiculo) {
+    public ResponseEntity<Ticket> registrarEntrada(@Validated @RequestBody Veiculo veiculo) {
 
         Ticket ticket = parquimetroService.registrarEntrada(veiculo);
         return ResponseEntity.ok(ticket);
