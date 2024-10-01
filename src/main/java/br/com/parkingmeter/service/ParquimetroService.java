@@ -1,6 +1,7 @@
 package br.com.parkingmeter.service;
 
 import br.com.parkingmeter.exception.ResourceNotFoundException;
+import br.com.parkingmeter.exception.TicketAlreadyClosedException;
 import br.com.parkingmeter.model.Ticket;
 import br.com.parkingmeter.model.Veiculo;
 import br.com.parkingmeter.repository.TicketRepository;
@@ -20,6 +21,13 @@ public class ParquimetroService {
 
     public Ticket registrarEntrada(Veiculo veiculo) {
 
+        boolean existeTicketAtivo = ticketRepository.findByPlaca(veiculo.getPlaca()).stream()
+                .anyMatch(ticket -> ticket.getHoraSaida() == null);
+
+        if (existeTicketAtivo) {
+            throw new IllegalStateException("Já existe um ticket ativo para o veículo com placa: " + veiculo.getPlaca());
+        }
+
         Ticket ticket = new Ticket();
         ticket.setPlaca(veiculo.getPlaca());
         ticket.setHoraEntrada(LocalDateTime.now());
@@ -37,6 +45,7 @@ public class ParquimetroService {
         if(optionalTicket.isPresent()) {
 
             Ticket ticket = optionalTicket.get();
+
             ticket.setHoraSaida(LocalDateTime.now());
 
             long horasEstacionadas = java.time.Duration.between(ticket.getHoraEntrada(), ticket.getHoraSaida()).toHours();
@@ -51,7 +60,7 @@ public class ParquimetroService {
 
         } else {
 
-            throw new ResourceNotFoundException("Ticket não encontrado para a placa: " + placa);
+            throw new ResourceNotFoundException("Ticket não encontrado ou já fechado para a placa: " + placa);
 
         }
     }

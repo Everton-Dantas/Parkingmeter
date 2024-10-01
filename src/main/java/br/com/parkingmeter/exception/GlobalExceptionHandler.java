@@ -39,4 +39,20 @@ public class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(TicketAlreadyClosedException.class)
+    public ResponseEntity<ValidationError> handleTicketAlreadyClosedException(TicketAlreadyClosedException ex) {
+
+        ValidationError error = new ValidationError("ticket", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ValidationError> handleIllegalStateException(IllegalStateException ex) {
+
+        ValidationError error = new ValidationError("sistema", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+
+    }
+
 }
