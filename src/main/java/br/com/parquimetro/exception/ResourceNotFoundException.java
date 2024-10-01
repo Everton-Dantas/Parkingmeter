@@ -1,4 +1,4 @@
-package br.com.parkingmeter.exception;
+package br.com.parquimetro.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 

@@ -1,15 +1,15 @@
-package br.com.parkingmeter.service;
+package br.com.parquimetro.service;
 
-import br.com.parkingmeter.exception.ResourceNotFoundException;
-import br.com.parkingmeter.exception.TicketAlreadyClosedException;
-import br.com.parkingmeter.model.Ticket;
-import br.com.parkingmeter.model.Veiculo;
-import br.com.parkingmeter.repository.TicketRepository;
+import br.com.parquimetro.exception.ResourceNotFoundException;
+import br.com.parquimetro.model.Ticket;
+import br.com.parquimetro.model.Veiculo;
+import br.com.parquimetro.repository.TicketRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -38,6 +38,8 @@ public class ParquimetroService {
     @Transactional
     public Ticket registrarSaida(String placa) {
 
+        BigDecimal valorPorHora = BigDecimal.valueOf(5.00);
+
         Optional<Ticket> optionalTicket = ticketRepository.findByPlaca(placa).stream()
                 .filter(ticket -> ticket.getHoraSaida() == null)
                 .findFirst();
@@ -51,9 +53,9 @@ public class ParquimetroService {
             long horasEstacionadas = java.time.Duration.between(ticket.getHoraEntrada(), ticket.getHoraSaida()).toHours();
 
             if (horasEstacionadas == 0) {
-                ticket.setValor(BigDecimal.valueOf(5.00));
+                ticket.setValor(valorPorHora);
             } else {
-                ticket.setValor(BigDecimal.valueOf(horasEstacionadas * 5.00)); // R$ 5,00 a hora
+                ticket.setValor(BigDecimal.valueOf(horasEstacionadas).multiply(valorPorHora).setScale(2, RoundingMode.HALF_UP));
             }
 
             return ticketRepository.save(ticket);

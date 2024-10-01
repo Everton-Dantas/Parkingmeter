@@ -1,14 +1,14 @@
-package br.com.parkingmeter;
+package br.com.parquimetro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ParkingmeterApplication {
+public class ParquimetroApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(ParkingmeterApplication.class, args);
+        SpringApplication.run(ParquimetroApplication.class, args);
 
     }
 }

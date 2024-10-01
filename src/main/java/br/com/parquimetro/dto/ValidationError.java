@@ -1,4 +1,4 @@
-package br.com.parkingmeter.dto;
+package br.com.parquimetro.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

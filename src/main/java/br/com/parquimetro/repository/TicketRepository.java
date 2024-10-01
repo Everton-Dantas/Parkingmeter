@@ -1,6 +1,6 @@
-package br.com.parkingmeter.repository;
+package br.com.parquimetro.repository;
 
-import br.com.parkingmeter.model.Ticket;
+import br.com.parquimetro.model.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package br.com.parkingmeter.model;
+package br.com.parquimetro.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

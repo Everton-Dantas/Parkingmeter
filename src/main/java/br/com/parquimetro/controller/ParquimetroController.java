@@ -1,8 +1,8 @@
-package br.com.parkingmeter.controller;
+package br.com.parquimetro.controller;
 
-import br.com.parkingmeter.model.Ticket;
-import br.com.parkingmeter.model.Veiculo;
-import br.com.parkingmeter.service.ParquimetroService;
+import br.com.parquimetro.model.Ticket;
+import br.com.parquimetro.model.Veiculo;
+import br.com.parquimetro.service.ParquimetroService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

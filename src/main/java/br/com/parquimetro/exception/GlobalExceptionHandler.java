@@ -1,6 +1,6 @@
-package br.com.parkingmeter.exception;
+package br.com.parquimetro.exception;
 
-import br.com.parkingmeter.dto.ValidationError;
+import br.com.parquimetro.dto.ValidationError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
