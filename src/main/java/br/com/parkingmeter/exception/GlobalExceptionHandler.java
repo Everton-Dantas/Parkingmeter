@@ -1,10 +1,7 @@
 package br.com.parkingmeter.exception;
 
 import br.com.parkingmeter.dto.ValidationError;
-import org.apache.coyote.Response;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,15 +10,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex) {
+    public ResponseEntity<ValidationError> handleResourceNotFoundException(ResourceNotFoundException ex) {
 
-        return ResponseEntity.status(404).body(ex.getMessage());
+        ValidationError error = new ValidationError("ticket", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 
     }
 
