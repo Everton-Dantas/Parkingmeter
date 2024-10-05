@@ -31,9 +31,7 @@ public class ParquimetroServiceTest {
 
     @BeforeEach
     void setUp() {
-
         MockitoAnnotations.openMocks(this);
-
     }
 
     @Nested
@@ -142,6 +140,28 @@ public class ParquimetroServiceTest {
             });
 
             assertEquals("Ticket não encontrado ou já fechado para a placa: 1234567", exception.getMessage());
+
+        }
+
+        @Test
+        @DisplayName("Deve cobrar valor fixo quando período de estacionamento é menor que 1 hora")
+        void testCobrarValorFixo() {
+
+            Ticket ticket = new Ticket();
+            ticket.setPlaca("1234567");
+            ticket.setHoraEntrada(LocalDateTime.now().minusMinutes(30));
+            ticket.setHoraSaida(null);
+
+            BigDecimal valorPorHora = BigDecimal.valueOf(5.00);
+
+            when(ticketRepository.findByPlaca("1234567")).thenReturn(Collections.singletonList(ticket));
+            when(ticketRepository.save(any(Ticket.class))).thenReturn(ticket);
+
+            Ticket resultado = parquimetroService.registrarSaida("1234567");
+
+            assertNotNull(resultado.getHoraSaida());
+            assertEquals(valorPorHora, resultado.getValor());
+            verify(ticketRepository, times(1)).save(any(Ticket.class));
 
         }
 
